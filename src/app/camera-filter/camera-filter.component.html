@@ -1,0 +1,138 @@
+<!-- <div id="container" fxLayout="row" fxLayout.xs="column">
+    <div fxFlex="50" fxFlex.xs="100px" style="background-color: aquamarine;">
+        <label for="filter">Filter: </label>
+        <select id="filter" >
+            <option value="none">None</option>
+            <option value="blur">Blur</option>
+            <option value="grayscale">Grayscale</option>
+            <option value="invert">Invert</option>
+            <option value="sepia" selected>Sepia</option>
+        </select>
+    </div>
+    <div fxFlex="50" fxLayout="column" fxLayoutAlign="center center">
+        <div>
+            <div class="canvasPlayerSection">
+                <video playsinline autoplay id="videoRecorder" class="canvasPlayerSectionChildren"></video>
+                <canvas class="canvasPlayerSectionChildren"></canvas>
+                <video class="canvasPlayerSectionChildren" autoplay id="displayVideo" loop controls ></video>
+                <div id="buttonContainer" style="position: absolute;">Buttons</div>
+            </div>
+        </div>
+        <div fxFlex="30">
+            Buttons
+        </div>
+    </div>
+</div>
+<div>
+    <button id="record">Start Recording</button>
+    <button id="play" disabled>Play</button>
+    <button id="download" disabled>Download</button>
+</div>
+<svg>
+    <filter id="duotone" color-interpolation-filters="sRGB"
+            x="0" y="0" height="100%" width="100%">
+       <feColorMatrix
+        type = "matrix"
+        values="0.9     0     0     0     0
+                0     0.6     0     0     0
+                0     0     0.7     0     0
+                0     0     0      1     0 "/>
+    </filter>
+</svg> -->
+
+<div fxLayout="column" fxFlex="100" style="height:100vh; background-color: red;">
+    <div fxLayout="row" style="height: 100%;">
+        <div fxHide.xs="true" fxFlex="50" style="background-color: rebeccapurple;"></div>
+        <div fxLayout="column" style="height: 100%;" fxFlex.xs="100" fxFlex="50" style="background-color: green;">
+            <div fxLayout="column" style="height: 100%;">
+                <div fxFlex="10" fxFlex.xs="5"></div>
+                <div fxFlex="60" fxFlex.gt-xs="50" fxFlex.xs="45" style="background-color: hotpink; overflow: hidden;">
+                    <div fxLayout="column" fxLayoutAlign="center center" fxFlex="450px" fxFlex.xs="auto" style="margin: auto;" class="canvasPlayerSection">
+                        <video fxFlex="400px" fxFlex.xs="auto" playsinline autoplay id="videoRecorder" class="canvasPlayerSectionChildren"></video>
+                        <canvas fxFlex="400px" fxFlex.xs="auto" class="canvasPlayerSectionChildren"></canvas>
+                        <video fxFlex="400px" fxFlex.xs="auto" class="canvasPlayerSectionChildren" style="visibility: hidden;" autoplay id="displayVideo" loop controls ></video>
+                        <!-- <div id="buttonContainer" style="position: absolute;">Buttons</div> -->
+                    </div>
+                </div>
+                <div fxLayout="column" fxLayoutAlign="center center">
+                    <div fxLayout="row" fxLayoutAlign="center center" style="position: relative;margin:15px 0; width: 100%;">
+                        <button (click)="cancelVideo()" class="cancel-button">Cancel</button>
+                        <button (click)="toggleRecording()"  class="record-button"></button>
+                        <!-- <button id="play" disabled>Play</button> -->
+                        <button (click)="downloadVideo()" style="position: absolute; right: 10px;">Download</button>
+                    </div>
+                    <div id="filter-container" style="width:90%; background-color: aquamarine;overflow: auto;white-space: nowrap;height: 120px; " class="filter-container">
+                        <div *ngFor="let filter of filterList" (click)="setFilter(filter)" style="display: inline-block; height: 110px; width: 150px;background-color: rgb(146, 79, 194);border: 2px solid white;">
+                            <p style="font-weight: bold; font-size: 15px;font-family: Arial, Helvetica, sans-serif;padding: 0;margin: 0; text-align: center;">{{filter.name}} </p>
+                            <video  preload="metadata" [id]="filter.id" style="height:90px;" playsinline autoplay muted class="filter-video-element"></video>
+                        </div>
+                    </div>
+                    <!-- <label for="filter">Filter: </label>
+                    <select id="filter" >
+                        <option value="none">None</option>
+                        <option value="blur">Blur</option>
+                        <option value="grayscale">Grayscale</option>
+                        <option value="invert">Invert</option>
+                        <option value="sepia" selected>Sepia</option>
+                    </select> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<svg class="defs-only">
+    <filter id="duotone" color-interpolation-filters="sRGB"
+            x="0" y="0" height="100%" width="100%">
+        <feColorMatrix
+        type = "matrix"
+        values="0.9     0     0     0     0
+                0     0.6     0     0     0
+                0     0     0.7     0     0
+                0     0     0      1     0 "/>
+    </filter>
+</svg>
+<svg class="defs-only">
+    <filter id="transferid" color-interpolation-filters="sRGB"
+            x="0" y="0" height="100%" width="100%">
+            <feColorMatrix type="matrix"
+            values="0.80 0 0 0   0.10 
+                    0.95 0 0 0   0  
+                -0.20 0 0 0   0.65 
+                    0  0 0 1   0"/>
+    </filter>
+</svg>
+<svg class="defs-only">
+    <filter id="processid" color-interpolation-filters="sRGB"
+            x="0" y="0" height="100%" width="100%">
+            <feColorMatrix type="matrix"
+            values="0     0     0     0     0
+                0     1     0     0     0
+                0     0     0.9   0     0
+                0     0     0     1     0"/>
+    </filter>
+</svg>
+<svg class="defs-only">
+    <filter id="noirid" color-interpolation-filters="sRGB"
+            x="0" y="0" height="100%" width="100%">
+            <feColorMatrix
+            type = "matrix"
+            values="0.9     0     0     0     0
+            0     0.9     0     0     0
+            0     0     0.9   0     0
+            0     0     0     1     0"/>
+    </filter>
+</svg>
+<svg class="defs-only">
+    <filter id="tonalid" color-interpolation-filters="sRGB"
+            x="0" y="0" height="100%" width="100%">
+        <feColorMatrix
+        type = "matrix"
+        values="0.95 0 0 0 0.05 
+                0.85 0 0 0 0.15  
+                0.50 0 0 0 0.50 
+                0    0 0 1 0" />
+    </filter>
+</svg>
+
