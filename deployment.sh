@@ -1,2 +1,3 @@
-# ng build --prod
-docker build -t camera-filter .
+git add -A .
+git commit -m "Fixes"
+git push origin master

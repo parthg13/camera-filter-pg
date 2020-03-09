@@ -106,7 +106,7 @@ export class CameraFilterComponent implements OnInit {
       // videoPlayer.setAttribute('height', video.videoHeight + 'px !important;');
       console.log("canvas.height:",video.videoHeight);
       // videoPlayer.setAttribute('width', canvas.width + 'px !important;')
-      const ctx = canvas.getContext("2d");
+      const ctx = canvas.getContext("2d",{alpha: false});
       ctx.setTransform(-1,0,0,1,canvas.width,0); // disables inverted image
       
       // ctx.filter = "grayscale(100%)"  // sets filter
