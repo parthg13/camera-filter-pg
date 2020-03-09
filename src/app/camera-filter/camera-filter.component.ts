@@ -164,7 +164,7 @@ export class CameraFilterComponent implements OnInit {
     // downloadButton.disabled = true;
     this.mediaRecorder.onstop =  (event)=> this.handleStop(event);
     this.mediaRecorder.ondataavailable =(event)=> this.handleDataAvailable(event);
-    this.mediaRecorder.start(10); // collect 25ms of data
+    this.mediaRecorder.start(10); // collect 10ms of data
     console.log('MediaRecorder started', this.mediaRecorder);
   }
   handleStop(event) {
