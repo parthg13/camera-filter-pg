@@ -125,7 +125,7 @@ export class CameraFilterComponent implements OnInit {
     requestAnimationFrame(()=>this.step(ctx,video,canvas))
   }
   startRecording() {
-    let options:any = {mimeType: 'video/webm'};
+    let options:any = {mimeType: 'video/webm;codecs=vp9,opus'};
     this.recordedBlobs = [];
     const displayVideo:any = document.getElementById('displayVideo');
     displayVideo.style.visibility = 'hidden';
